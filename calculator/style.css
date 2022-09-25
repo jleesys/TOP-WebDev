@@ -1,0 +1,18 @@
+div.display {
+    background-color: azure;
+    padding: 5px;
+    height: 2em;
+}
+
+div.keys {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    width: 300px;
+    margin: auto;
+}
+
+button.num{
+    width: 100px;
+    height: 100px;
+}
