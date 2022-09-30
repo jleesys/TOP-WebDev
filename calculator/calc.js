@@ -90,31 +90,8 @@ operators.forEach(item => {
             setNumber();
             isNumber = 0;
         }
-
-        /*
-        if (inputState == 0) {
-            a = numberInput;
-            display.textContent = display.textContent + ` ${currentOperatorText} `;
-            inputState++;
-            console.log(`var a has changed. a = ${a}`)
-        } else {
-            b = numberInput;
-            inputState--;
-            console.log(`var b has changed. b = ${b}`)
-        }
-        numberInput = '';
-        */
     })
 })
-
-/*
-//    making defunct by creating parseOperator() and adding it to operators forEach
-subtractButton.addEventListener('click', () => {
-    currentOperator = 'subtract';
-    currentOperatorText = '-';
-    console.log(`the current operator: ${currentOperator}\noperator text: ${currentOperatorText}`)
-})
-*/
 
 equalsButton.addEventListener('click', () => {
     if (inputState == 1) b = numberInput;
