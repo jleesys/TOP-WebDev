@@ -1,38 +1,38 @@
 let currentOperator;
 
-const operate = (a,b,operator) => {
+const operate = (a, b, operator) => {
     let output;
     switch (operator) {
         case "add":
-            output = add(a,b);
+            output = add(a, b);
             break;
         case "subtract":
-            output = subtract(a,b);
+            output = subtract(a, b);
             break;
         case "multiply":
-            output = multiply(a,b);
+            output = multiply(a, b);
             break;
         case "divide":
-            output = divide(a,b);
+            output = divide(a, b);
             break;
         default:
             console.log('error');
     }
     return output;
 }
-const add = function(a,b){
-    return a+b;
+const add = function (a, b) {
+    return a + b;
 }
 
-const subtract = function (a,b) {
-    return a-b;
+const subtract = function (a, b) {
+    return a - b;
 }
 
-const multiply = function(a,b) {
+const multiply = function (a, b) {
     return a * b;
 }
 
-const divide = function(a,b) {
+const divide = function (a, b) {
     return a / b;
 }
 
@@ -48,20 +48,23 @@ const clearButton = document.querySelector('.clear-button');
 
 minusButton.addEventListener('click', () => {
     currentOperator = 'minus';
+    console.log(`the current operator: ${currentOperator}`)
 })
 
 equalsButton.addEventListener('click', () => {
-    console.log(operate(a,b,operator));
+    console.log(operate(a, b, operator));
 })
 
-keysInput.forEach( item => {
+keysInput.forEach(item => {
     item.addEventListener('click', () => {
-        display.textContent = display.textContent + item.innerHTML;
+        let numberInput = item.innerHTML;
+        display.textContent = display.textContent + numberInput;
     })
 })
 
 clearButton.addEventListener('click', () => {
     display.textContent = '';
+    console.log('clear')
 })
 
 /*
