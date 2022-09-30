@@ -41,9 +41,10 @@ function pressKey() {
 }
 
 const display = document.querySelector('.display');
-const buttons = document.querySelector('.keys-face');
+const keysInput = document.querySelectorAll('button.num');
 const minusButton = document.querySelector('.minus-button');
 const equalsButton = document.querySelector('.equals-button');
+const clearButton = document.querySelector('.clear-button');
 
 minusButton.addEventListener('click', () => {
     currentOperator = 'minus';
@@ -53,6 +54,20 @@ equalsButton.addEventListener('click', () => {
     console.log(operate(a,b,operator));
 })
 
-buttons.addEventListener('click', () => {
-    display.textContent = buttons.innerHTML;
+keysInput.forEach( item => {
+    item.addEventListener('click', () => {
+        display.textContent = display.textContent + item.innerHTML;
+    })
 })
+
+clearButton.addEventListener('click', () => {
+    display.textContent = '';
+})
+
+/*
+// have to use forEach due to using querySelectorAll (node list)
+keysInput.addEventListener('click', () => {
+    display.textContent = display.textContent + keysInput.innerHTML;
+    console.log(`inserting character ${keysInput.innerHTML}`)
+})
+*/
