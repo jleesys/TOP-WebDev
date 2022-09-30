@@ -1,7 +1,11 @@
+body {
+    background-color: black;
+}
 div.display {
-    background-color: azure;
+    background-color: teal;
     padding: 5px;
     height: 2em;
+    text-align: center;
 }
 
 div.keys {
@@ -15,4 +19,5 @@ div.keys {
 button.num{
     width: 100px;
     height: 100px;
+    background-color: grey;
 }

@@ -1,3 +1,5 @@
+let currentOperator;
+
 const operate = (a,b,operator) => {
     let output;
     switch (operator) {
@@ -34,8 +36,22 @@ const divide = function(a,b) {
     return a / b;
 }
 
+function pressKey() {
+
+}
+
 const display = document.querySelector('.display');
 const buttons = document.querySelector('.keys');
+const minusButton = document.querySelector('.minus-button');
+const equalsButton = document.querySelector('.equals-button');
+
+minusButton.addEventListener('click', () => {
+    currentOperator = 'minus';
+})
+
+equalsButton.addEventListener('click', () => {
+    console.log(operate(a,b,operator));
+})
 
 buttons.addEventListener('click', () => {
     display.textContent = buttons.innerHTML;
