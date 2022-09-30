@@ -1,4 +1,9 @@
 let currentOperator;
+let currentOperatorText;
+let a = 0;
+let b = 0;
+let inputState = 0;
+let numberInput = '';
 
 const operate = (a, b, operator) => {
     let output;
@@ -41,36 +46,84 @@ function pressKey() {
 }
 
 const display = document.querySelector('.display');
+const operators = document.querySelectorAll('.operator');
 const keysInput = document.querySelectorAll('button.num');
 const minusButton = document.querySelector('.minus-button');
 const equalsButton = document.querySelector('.equals-button');
 const clearButton = document.querySelector('.clear-button');
 
-minusButton.addEventListener('click', () => {
-    currentOperator = 'minus';
-    console.log(`the current operator: ${currentOperator}`)
+function parseOperator(item) {
+    currentOperatorText = item.innerHTML;
+
+    switch (currentOperatorText) {
+        case '-':
+            currentOperator = 'minus';
+            console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
+    }
+}
+
+function setNumber() {
+    if (inputState == 0) {
+        a = numberInput;
+        display.textContent = display.textContent + ` ${currentOperatorText} `;
+        inputState++;
+        console.log(`var a has changed. a = ${a}`)
+    } else {
+        b = numberInput;
+        display.textContent = display.textContent + ` ${currentOperatorText} `;
+        inputState--;
+        console.log(`var b has changed. b = ${b}`)
+    }
+    numberInput = '';
+}
+
+operators.forEach(item => {
+    item.addEventListener('click', () => {
+        parseOperator(item);
+        setNumber();
+        /*
+        if (inputState == 0) {
+            a = numberInput;
+            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            inputState++;
+            console.log(`var a has changed. a = ${a}`)
+        } else {
+            b = numberInput;
+            inputState--;
+            console.log(`var b has changed. b = ${b}`)
+        }
+        numberInput = '';
+        */
+    })
 })
 
+/*
+//    making defunct by creating parseOperator() and adding it to operators forEach
+minusButton.addEventListener('click', () => {
+    currentOperator = 'minus';
+    currentOperatorText = '-';
+    console.log(`the current operator: ${currentOperator}\noperator text: ${currentOperatorText}`)
+})
+*/
+
 equalsButton.addEventListener('click', () => {
-    console.log(operate(a, b, operator));
+    console.log(operate(a, b, currentOperator));
 })
 
 keysInput.forEach(item => {
     item.addEventListener('click', () => {
-        let numberInput = item.innerHTML;
-        display.textContent = display.textContent + numberInput;
+        let digitInput = item.innerHTML;
+        numberInput += digitInput;
+        display.textContent = display.textContent + digitInput;
     })
 })
 
 clearButton.addEventListener('click', () => {
     display.textContent = '';
-    console.log('clear')
+    a = '';
+    b = '';
+    digitInput = '';
+    numberInput = '';
+    inputState = 0;
+    console.log(`clear\na: ${a}\nb: ${b}`)
 })
-
-/*
-// have to use forEach due to using querySelectorAll (node list)
-keysInput.addEventListener('click', () => {
-    display.textContent = display.textContent + keysInput.innerHTML;
-    console.log(`inserting character ${keysInput.innerHTML}`)
-})
-*/
