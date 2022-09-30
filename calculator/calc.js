@@ -58,13 +58,16 @@ function parseOperator(item) {
 
     switch (currentOperatorText) {
         case '-':
-            currentOperator = 'minus';
+            currentOperator = 'subtract';
             console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
     }
 }
 
 function setNumber() {
-    if (display.innerHTML == '') { display.innerHTML = `0 ${currentOperatorText} `; return;}
+    if (display.innerHTML == '') {
+        display.innerHTML = `0 ${currentOperatorText} `;
+        inputState++; return;
+    }
     if (inputState == 0) {
         a = numberInput;
         display.textContent = display.textContent + ` ${currentOperatorText} `;
@@ -72,7 +75,8 @@ function setNumber() {
         console.log(`var a has changed. a = ${a}`)
     } else {
         b = numberInput;
-        display.textContent = display.textContent + ` ${currentOperatorText} `;
+        // display.textContent = display.textContent + ` ${currentOperatorText} `;
+        display.textContent = operate(a, b, currentOperator);
         inputState--;
         console.log(`var b has changed. b = ${b}`)
     }
@@ -86,6 +90,7 @@ operators.forEach(item => {
             setNumber();
             isNumber = 0;
         }
+
         /*
         if (inputState == 0) {
             a = numberInput;
@@ -104,16 +109,18 @@ operators.forEach(item => {
 
 /*
 //    making defunct by creating parseOperator() and adding it to operators forEach
-minusButton.addEventListener('click', () => {
-    currentOperator = 'minus';
+subtractButton.addEventListener('click', () => {
+    currentOperator = 'subtract';
     currentOperatorText = '-';
     console.log(`the current operator: ${currentOperator}\noperator text: ${currentOperatorText}`)
 })
 */
 
 equalsButton.addEventListener('click', () => {
-    isNumber = 0;
+    if (inputState == 1) b = numberInput;
     console.log(operate(a, b, currentOperator));
+    display.textContent = operate(a, b, currentOperator);
+    isNumber = 0;
 })
 
 keysInput.forEach(item => {
