@@ -1,11 +1,13 @@
-let currentOperator;
-let currentOperatorText;
+// let currentOperator;
+// let currentOperatorText;
 let a = 0;
 let b = 0;
 let inputState = 0;
 let isNumber = 1;
 let readyCalc = 0;
 let numberInput = '';
+let currentOperator = 'add';
+let currentOperatorText = '+';
 
 const operate = (a, b, operator) => {
     let output;
@@ -28,7 +30,7 @@ const operate = (a, b, operator) => {
     return output;
 }
 const add = function (a, b) {
-    return a + b;
+    return +a + +b;
 }
 
 const subtract = function (a, b) {
@@ -58,6 +60,22 @@ function parseOperator(item) {
             currentOperator = 'subtract';
             console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
             display.textContent = display.textContent + ` ${currentOperatorText} `;
+            break;
+        case '+':
+            currentOperator = 'add';
+            console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
+            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            break;
+        case '*':
+            currentOperator = 'multiply';
+            console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
+            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            break;
+        case '/':
+            currentOperator = 'divide';
+            console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
+            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            break;
     }
 }
 
@@ -65,10 +83,12 @@ function parseOperator(item) {
 if inputState is 0, b is 
 */
 function setNumber() {
+    /*
     if (display.innerHTML == '') {
         display.innerHTML = `0 ${currentOperatorText} `;
         inputState++; return;
     }
+    */
     if (inputState == 0) {
         a = numberInput;
         inputState++;
@@ -91,8 +111,9 @@ function calculate() {
 
 operators.forEach(item => {
     item.addEventListener('click', () => {
-        if (isNumber != 0) {
+        // if (isNumber != 0) {
             parseOperator(item);
+            if (numberInput != '') {
             setNumber();
             if (readyCalc) {
                 let output = calculate();
