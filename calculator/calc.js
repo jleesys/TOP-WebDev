@@ -3,6 +3,7 @@ let currentOperatorText;
 let a = 0;
 let b = 0;
 let inputState = 0;
+let isNumber = 1;
 let numberInput = '';
 
 const operate = (a, b, operator) => {
@@ -63,6 +64,7 @@ function parseOperator(item) {
 }
 
 function setNumber() {
+    if (display.innerHTML == '') { display.innerHTML = `0 ${currentOperatorText} `; return;}
     if (inputState == 0) {
         a = numberInput;
         display.textContent = display.textContent + ` ${currentOperatorText} `;
@@ -79,8 +81,11 @@ function setNumber() {
 
 operators.forEach(item => {
     item.addEventListener('click', () => {
-        parseOperator(item);
-        setNumber();
+        if (isNumber != 0) {
+            parseOperator(item);
+            setNumber();
+            isNumber = 0;
+        }
         /*
         if (inputState == 0) {
             a = numberInput;
@@ -107,12 +112,14 @@ minusButton.addEventListener('click', () => {
 */
 
 equalsButton.addEventListener('click', () => {
+    isNumber = 0;
     console.log(operate(a, b, currentOperator));
 })
 
 keysInput.forEach(item => {
     item.addEventListener('click', () => {
         let digitInput = item.innerHTML;
+        isNumber++;
         numberInput += digitInput;
         display.textContent = display.textContent + digitInput;
     })
@@ -125,5 +132,6 @@ clearButton.addEventListener('click', () => {
     digitInput = '';
     numberInput = '';
     inputState = 0;
+    isNumber = 0;
     console.log(`clear\na: ${a}\nb: ${b}`)
 })
