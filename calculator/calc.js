@@ -4,6 +4,7 @@ let a = 0;
 let b = 0;
 let inputState = 0;
 let isNumber = 1;
+let readyCalc = 0;
 let numberInput = '';
 
 const operate = (a, b, operator) => {
@@ -42,10 +43,6 @@ const divide = function (a, b) {
     return a / b;
 }
 
-function pressKey() {
-
-}
-
 const display = document.querySelector('.display');
 const operators = document.querySelectorAll('.operator');
 const keysInput = document.querySelectorAll('button.num');
@@ -60,9 +57,13 @@ function parseOperator(item) {
         case '-':
             currentOperator = 'subtract';
             console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
+            display.textContent = display.textContent + ` ${currentOperatorText} `;
     }
 }
 
+/* if inputState is 1, a is loaded. b is empty
+if inputState is 0, b is 
+*/
 function setNumber() {
     if (display.innerHTML == '') {
         display.innerHTML = `0 ${currentOperatorText} `;
@@ -70,17 +71,22 @@ function setNumber() {
     }
     if (inputState == 0) {
         a = numberInput;
-        display.textContent = display.textContent + ` ${currentOperatorText} `;
         inputState++;
         console.log(`var a has changed. a = ${a}`)
     } else {
         b = numberInput;
-        // display.textContent = display.textContent + ` ${currentOperatorText} `;
-        display.textContent = operate(a, b, currentOperator);
-        inputState--;
+        readyCalc = 1;
         console.log(`var b has changed. b = ${b}`)
     }
     numberInput = '';
+}
+
+function calculate() {
+    let output = operate(a, b, currentOperator);
+    display.textContent = output;
+    console.log(`${a} ${currentOperatorText} ${b}`);
+    readyCalc = 0;
+    return output;
 }
 
 operators.forEach(item => {
@@ -88,16 +94,21 @@ operators.forEach(item => {
         if (isNumber != 0) {
             parseOperator(item);
             setNumber();
-            isNumber = 0;
+            if (readyCalc) {
+                let output = calculate();
+                a = output;
+                b = 0;
+            }
         }
     })
 })
 
 equalsButton.addEventListener('click', () => {
-    if (inputState == 1) b = numberInput;
-    console.log(operate(a, b, currentOperator));
-    display.textContent = operate(a, b, currentOperator);
-    isNumber = 0;
+    setNumber();
+    let output = calculate();
+    a = output;
+    b = 0;
+    // inputState = 0;
 })
 
 keysInput.forEach(item => {
@@ -117,5 +128,6 @@ clearButton.addEventListener('click', () => {
     numberInput = '';
     inputState = 0;
     isNumber = 0;
+    readyCalc = 0;
     console.log(`clear\na: ${a}\nb: ${b}`)
 })
