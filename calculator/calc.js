@@ -41,7 +41,7 @@ function pressKey() {
 }
 
 const display = document.querySelector('.display');
-const buttons = document.querySelector('.keys');
+const buttons = document.querySelector('.keys-face');
 const minusButton = document.querySelector('.minus-button');
 const equalsButton = document.querySelector('.equals-button');
 
