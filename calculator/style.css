@@ -1,6 +1,7 @@
 body {
     background-color: black;
 }
+
 div.display {
     background-color: teal;
     padding: 5px;
@@ -8,7 +9,7 @@ div.display {
     text-align: center;
 }
 
-div.keys {
+div.keys-face {
     display: flex;
     justify-content: center;
     flex-flow: wrap;
@@ -17,7 +18,14 @@ div.keys {
 }
 
 button.num{
+}
+
+.key {
     width: 100px;
     height: 100px;
     background-color: grey;
+}
+
+.key:hover {
+    background-color: lightgray;
 }
