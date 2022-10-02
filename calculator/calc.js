@@ -52,6 +52,14 @@ const minusButton = document.querySelector('.minus-button');
 const equalsButton = document.querySelector('.equals-button');
 const clearButton = document.querySelector('.clear-button');
 
+function updateDisplay(argument) {
+    display.textContent = display.textContent + ` ${argument} ` ;
+}
+
+function updateDisplayNums(argument) {
+    display.textContent = display.textContent + `${argument}`;
+}
+
 function parseOperator(item) {
     currentOperatorText = item.innerHTML;
 
@@ -59,22 +67,23 @@ function parseOperator(item) {
         case '-':
             currentOperator = 'subtract';
             console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
-            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            // display.textContent = display.textContent + ` ${currentOperatorText} `;
+            updateDisplay(currentOperatorText);
             break;
         case '+':
             currentOperator = 'add';
             console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
-            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            updateDisplay(currentOperatorText);
             break;
         case '*':
             currentOperator = 'multiply';
             console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
-            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            updateDisplay(currentOperatorText);
             break;
         case '/':
             currentOperator = 'divide';
             console.log(`the current operator is now ${currentOperator} ${currentOperatorText}`)
-            display.textContent = display.textContent + ` ${currentOperatorText} `;
+            updateDisplay(currentOperatorText);
             break;
     }
 }
@@ -83,12 +92,6 @@ function parseOperator(item) {
 if inputState is 0, b is 
 */
 function setNumber() {
-    /*
-    if (display.innerHTML == '') {
-        display.innerHTML = `0 ${currentOperatorText} `;
-        inputState++; return;
-    }
-    */
     if (inputState == 0) {
         a = numberInput;
         inputState++;
@@ -137,7 +140,9 @@ keysInput.forEach(item => {
         let digitInput = item.innerHTML;
         isNumber++;
         numberInput += digitInput;
-        display.textContent = display.textContent + digitInput;
+        // updateDisplay(digitInput);  
+        updateDisplayNums(digitInput);
+        // display.textContent = display.textContent + digitInput;
     })
 })
 
